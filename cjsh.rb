@@ -30,8 +30,8 @@ class Cjsh < Formula
   def caveats
     <<~EOS
       CJ's Shell
-      To set as your default shell run 'cjsh --set-as-shell'
-       or run 'chsh -s #{opt_bin}/cjsh'
+      To set as your default shell run
+       'chsh -s #{opt_bin}/cjsh'
       To see the help menu run 'cjsh --help'
     EOS
   end
