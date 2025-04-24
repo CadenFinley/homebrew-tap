@@ -2,7 +2,7 @@ class Cjsh < Formula
   desc "CJ's Shell"
   homepage "https://github.com/CadenFinley/CJsShell"
   url "https://github.com/CadenFinley/CJsShell.git",
-      tag:      "2.0.3.1",
+      tag:      "2.0.2.5",
       revision: "22fcd2ef9ed81c36df7df369de30f06878db1db0"
 
   license "MIT"
@@ -16,7 +16,6 @@ class Cjsh < Formula
   def install
     system "cmake", "-S", ".", "-B", "build",
            "-DCMAKE_PREFIX_PATH=#{Formula["openssl@3"].opt_prefix}",
-           "-DBUILD_FOR_BREW=ON",
            *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
