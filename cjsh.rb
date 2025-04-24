@@ -2,8 +2,8 @@ class Cjsh < Formula
   desc "CJ's Shell"
   homepage "https://github.com/CadenFinley/CJsShell"
   url "https://github.com/CadenFinley/CJsShell.git",
-      tag:      "2.0.2.8",
-      revision: "c57226cae9146e483c5fec0d963431798b2f1c4b"
+      tag:      "2.0.2.9",
+      revision: "0f1ffa3aa12374a16204caef417b7489c1d4f674"
 
   license "MIT"
 
@@ -32,6 +32,8 @@ class Cjsh < Formula
       CJ's Shell
       To set as your default shell run
        'chsh -s #{opt_bin}/cjsh'
+      To add CJsShell to the list of allowed shells run
+       'sudo sh -c "echo #{opt_bin}/cjsh >> /etc/shells"'
       To see the help menu run 'cjsh --help'
     EOS
   end
