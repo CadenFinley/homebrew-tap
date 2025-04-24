@@ -13,4 +13,4 @@ git remote add cadenfinley https://github.com/cadenfinley/homebrew-core.git
 cd "$(brew --repository homebrew/core)"
 git checkout master
 brew update
-git checkout -b cjsh-v2.0.3.0 origin/master
+git checkout -b cjsh-2.0.3.1 origin/master

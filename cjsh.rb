@@ -4,15 +4,14 @@ class Cjsh < Formula
   url "https://github.com/CadenFinley/CJsShell.git",
       tag:      "2.0.3.1",
       revision: "22fcd2ef9ed81c36df7df369de30f06878db1db0"
-  version "2.0.3.1"
 
   license "MIT"
 
-  depends_on "cmake" => :build
-  depends_on "pkg-config" => :build
-  depends_on "openssl@3"
+  depends_on "cmake"      => :build
+  depends_on "pkgconf"    => :build
   depends_on "curl"
   depends_on "nlohmann-json"
+  depends_on "openssl@3"
 
   def install
     system "cmake", "-S", ".", "-B", "build",
@@ -24,11 +23,8 @@ class Cjsh < Formula
 
   def post_install
     original_shell = ENV["SHELL"]
-    (prefix/"original_shell.txt").write original_shell
-  end
-
-  test do
-    assert_match "v#{version}", shell_output("#{bin}/cjsh --version")
+    (var/"cjsh").mkpath
+    (var/"cjsh"/"original_shell.txt").write original_shell
   end
 
   def caveats
@@ -38,5 +34,9 @@ class Cjsh < Formula
       To see the help menu run 'cjsh --help'
       To launch cjsh as a login shell run 'cjsh --login'
     EOS
+  end
+
+  test do
+    assert_match "v#{version}", shell_output("#{bin}/cjsh --version")
   end
 end
