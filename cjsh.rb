@@ -16,6 +16,7 @@ class Cjsh < Formula
   def install
     system "cmake", "-S", ".", "-B", "build",
            "-DCMAKE_PREFIX_PATH=#{Formula["openssl@3"].opt_prefix}",
+           "-DBUILD_FOR_BREW=ON",
            *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
