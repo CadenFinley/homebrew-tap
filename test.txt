@@ -1,0 +1,7 @@
+git tag <version> && git push --tags
+git archive --format=tar.gz --prefix=cjsh-<version>/ -o cjsh-<version>.tar.gz HEAD
+shasum -a 256 cjsh‑<version>.tar.gz
+
+
+
+brew install --build-from-source --formula ./cjsh.rb
