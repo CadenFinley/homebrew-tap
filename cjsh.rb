@@ -2,8 +2,8 @@ class Cjsh < Formula
   desc "CJ's Shell"
   homepage "https://github.com/CadenFinley/CJsShell"
   url "https://github.com/CadenFinley/CJsShell.git",
-      tag:      "2.0.2.6",
-      revision: "c3aed0b2f7b6693e75850e765ae822d49503d701"
+      tag:      "2.0.2.7",
+      revision: "496b6f261f524ede08412d409f3c3b1fc1c9e14e"
 
   license "MIT"
 
