@@ -15,3 +15,7 @@ cd "$(brew --repository homebrew/core)"
 git checkout master
 brew update
 git checkout -b cjsh-2.0.3.1 origin/master
+
+
+cd Documents
+ll
