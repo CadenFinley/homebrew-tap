@@ -37,6 +37,11 @@ class Cjsh < Formula
     EOS
   end
 
+  def post_upgrade
+    ohai "CJ's Shell has been upgraded!"
+    ohai "Please restart your terminal session for the changes to take effect."
+  end
+
   def post_uninstall
     original_shell_file = var/"cjsh"/"original_shell.txt"
     if original_shell_file.exist?
