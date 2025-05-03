@@ -19,10 +19,6 @@ class Cjsh < Formula
            *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
-    
-    # Install man page
-    man1.install "#{buildpath}/cjsh.1"
-    
     (var/"cjsh").mkpath
     original_file = var/"cjsh"/"original_shell.txt"
     unless original_file.exist?
