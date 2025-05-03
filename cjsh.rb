@@ -19,21 +19,20 @@ class Cjsh < Formula
            *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
-  end
-
-  def post_install
-    original_shell = ENV["SHELL"]
     (var/"cjsh").mkpath
-    (var/"cjsh"/"original_shell.txt").write original_shell
+    original_file = var/"cjsh"/"original_shell.txt"
+    unless original_file.exist?
+      original_file.write ENV["SHELL"]
+    end
   end
 
   def caveats
     <<~EOS
       CJ's Shell
-      To set as your default shell run
-       'chsh -s #{opt_bin}/cjsh'
       To add CJsShell to the list of allowed shells run
        'sudo sh -c "echo #{opt_bin}/cjsh >> /etc/shells"'
+      To set as your default shell run
+       'chsh -s #{opt_bin}/cjsh'
       To see the help menu run 'cjsh --help'
     EOS
   end
