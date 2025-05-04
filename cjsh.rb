@@ -2,8 +2,8 @@ class Cjsh < Formula
   desc "CJ's Shell"
   homepage "https://github.com/CadenFinley/CJsShell"
   url "https://github.com/CadenFinley/CJsShell.git",
-      tag:      "2.1.3.4",
-      revision: "300f818ed10781adfcc4a3cbe66230d203c2bf7c"
+      tag:      "2.1.4.0",
+      revision: "93a2a543e4b01ca4426be838f9a0caf24a8e44a2"
 
   license "MIT"
 
@@ -33,6 +33,11 @@ class Cjsh < Formula
   def caveats
     <<~EOS
       CJ's Shell
+
+      Warning: cjsh is not a POSIX compliant shell. Similar to FISH, misuse of cjsh or
+      incorrectly setting it as your login shell can have adverse effects and there
+      is no warranty.
+
       To add CJsShell to the list of allowed shells run
        'sudo sh -c "echo #{opt_bin}/cjsh >> /etc/shells"'
       To set as your default shell run
