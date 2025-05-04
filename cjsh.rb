@@ -23,7 +23,7 @@ class Cjsh < Formula
     man1.install "man/cjsh.1"
     
     (var/"cjsh").mkpath
-    original_file = var/"cjsh"/"original_shell.txt"
+    original_file = var/"cjsh"/"original_shell"
     unless original_file.exist?
       original_file.write ENV["SHELL"]
     end
@@ -46,13 +46,14 @@ class Cjsh < Formula
   end
 
   def post_uninstall
-    original_shell_file = var/"cjsh"/"original_shell.txt"
+    original_shell_file = var/"cjsh"/"original_shell"
     if original_shell_file.exist?
       original_shell = original_shell_file.read.strip
-      if original_shell.present? && File.executable?(original_shell)
+     if !original_shell.empty? && File.executable?(original_shell)
         system "chsh", "-s", original_shell
         ohai "Your shell has been restored to: #{original_shell}"
         ohai "Please restart your terminal for the changes to take effect."
+       original_shell_file.unlink
       else
         opoo "Could not restore original shell: Invalid shell path found in #{original_shell_file}"
       end
