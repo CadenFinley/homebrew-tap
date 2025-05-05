@@ -2,7 +2,7 @@ class Cjsh < Formula
   desc "CJ's Shell"
   homepage "https://github.com/CadenFinley/CJsShell"
   url "https://github.com/CadenFinley/CJsShell.git",
-      tag:      "2.1.5.2",
+      tag:      "2.1.5.3",
       revision: "0392414a2e6e7eed1f07c379e052a6d7587d8e84"
 
   license "MIT"
@@ -15,19 +15,28 @@ class Cjsh < Formula
   depends_on "glib"
 
   def install
+    ohai "Configuring CJ's Shell with CMake..."
     system "cmake", "-S", ".", "-B", "build",
            "-DCMAKE_PREFIX_PATH=#{Formula["openssl@3"].opt_prefix}",
            *std_cmake_args
-    system "cmake", "--build", "build"
+    
+    ohai "Building CJ's Shell..."
+    system "cmake", "--build", "build", "--verbose"
+    
+    ohai "Installing CJ's Shell..."
     system "cmake", "--install", "build"
 
+    ohai "Installing man pages..."
     man1.install "man/cjsh.1"
     
+    ohai "Setting up environment..."
     (var/"cjsh").mkpath
     original_file = var/"cjsh"/"original_shell"
     unless original_file.exist?
       original_file.write ENV["SHELL"]
     end
+    
+    ohai "Installation complete!"
   end
 
   def caveats
