@@ -2,8 +2,8 @@ class Cjsh < Formula
   desc "CJ's Shell"
   homepage "https://github.com/CadenFinley/CJsShell"
   url "https://github.com/CadenFinley/CJsShell.git",
-      tag:      "2.1.13",
-      revision: "657be2fb35122c074e3ef9c78ae25bf49003b20c"
+      tag:      "2.1.14",
+      revision: "48df86306053f4ada8e0ec9f84e5f49af0851f7a"
 
   license "MIT"
 
@@ -12,7 +12,6 @@ class Cjsh < Formula
   depends_on "curl"
   depends_on "nlohmann-json"
   depends_on "openssl@3"
-  depends_on "glib"
 
   def install
     ohai "Configuring CJ's Shell with CMake..."
