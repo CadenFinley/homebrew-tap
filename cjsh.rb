@@ -2,8 +2,8 @@ class Cjsh < Formula
   desc "CJ's Shell"
   homepage "https://github.com/CadenFinley/CJsShell"
   url "https://github.com/CadenFinley/CJsShell.git",
-      tag:      "2.2.6",
-      revision: "9aa96e20fdcd086f15b46251da6c685ba4e97083"
+      tag:      "2.2.7",
+      revision: "0ca4c1051f6029e4556f06484cf718d8d153380c"
 
   license "MIT"
 
@@ -20,7 +20,7 @@ class Cjsh < Formula
            *std_cmake_args
     
     ohai "Building CJ's Shell..."
-    system "cmake", "--build", "build", "--verbose"
+    system "cmake", "--build", "build", "-j"
     
     ohai "Installing CJ's Shell..."
     system "cmake", "--install", "build"
