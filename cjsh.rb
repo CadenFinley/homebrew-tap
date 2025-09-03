@@ -48,7 +48,7 @@ class Cjsh < Formula
 
       Warning: cjsh is not a POSIX compliant shell. Similar to FISH, misuse of cjsh or
       incorrectly setting it as your login shell can have adverse effects and there
-      is no warranty.
+      is NO warranty.
 
       To add CJsShell to the list of allowed shells run:
         sudo sh -c "echo #{opt_bin}/cjsh >> /etc/shells"
