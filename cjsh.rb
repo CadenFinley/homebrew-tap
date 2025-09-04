@@ -3,13 +3,11 @@ class Cjsh < Formula
   homepage "https://github.com/CadenFinley/CJsShell"
   license "MIT"
   url "https://github.com/CadenFinley/CJsShell.git",
-      tag:      "2.3.7",
-      revision: "e851796f452b51d0f75765aba0fc6f1ec9e1af09"
+      tag:      "2.3.8",
+      revision: "38d044d959891697698ca2d5e630553bd08133a9"
   head "https://github.com/CadenFinley/CJsShell.git", branch: "master"
 
   depends_on "cmake"      => :build
-  depends_on "pkgconf"    => :build
-  depends_on "googletest" => :test
   depends_on "curl"
   depends_on "nlohmann-json"
   depends_on "openssl@3"
@@ -44,7 +42,12 @@ class Cjsh < Formula
     version_info = "development version"
     version_info = "v#{version}" if build.stable?
     <<~EOS
-      CJ's Shell (#{version_info})
+      #{'   ______       __   _____    __  __'}
+      #{'  / ____/      / /  / ___/   / / / /'}
+      #{' / /      __  / /   \\__ \\   / /_/ / '}
+      #{'/ /___   / /_/ /   ___/ /  / __  /  '}
+      #{'\\____/   \\____/   /____/  /_/ /_/   '}
+      #{'  CJ\'s Shell v' + (build.stable? ? version.to_s : "dev")}
 
       Warning: cjsh is not a POSIX compliant shell. Similar to FISH, misuse of cjsh or
       incorrectly setting it as your login shell can have adverse effects and there
