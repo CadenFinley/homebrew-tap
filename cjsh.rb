@@ -3,20 +3,17 @@ class Cjsh < Formula
   homepage "https://github.com/CadenFinley/CJsShell"
   license "MIT"
   url "https://github.com/CadenFinley/CJsShell.git",
-      tag:      "2.3.10",
-      revision: "14a3aceda850daf080b097b84a8c79863ba6858c"
+      tag:      "2.3.11",
+      revision: "2a5083d4854e1d3205d5ce2a6d9518f33b3bbd3e"
   head "https://github.com/CadenFinley/CJsShell.git", branch: "master"
 
   depends_on "cmake"      => :build
   depends_on "curl"
   depends_on "nlohmann-json"
-  depends_on "openssl@3"
-  depends_on "zlib"
 
   def install
     ohai "Configuring CJ's Shell with CMake..."
     args = std_cmake_args + %W[
-      -DCMAKE_PREFIX_PATH=#{Formula["openssl@3"].opt_prefix}
       -DCMAKE_FIND_FRAMEWORK=LAST
       -DBUILD_TESTS=OFF
     ]
