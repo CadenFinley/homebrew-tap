@@ -3,8 +3,8 @@ class Cjsh < Formula
   homepage "https://github.com/CadenFinley/CJsShell"
   license "MIT"
   url "https://github.com/CadenFinley/CJsShell.git",
-      tag:      "2.3.9",
-      revision: "65765c02a1e9067e712d52b824ed56cd419cfbd7"
+      tag:      "2.3.10",
+      revision: "14a3aceda850daf080b097b84a8c79863ba6858c"
   head "https://github.com/CadenFinley/CJsShell.git", branch: "master"
 
   depends_on "cmake"      => :build
