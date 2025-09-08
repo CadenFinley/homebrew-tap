@@ -46,9 +46,9 @@ class Cjsh < Formula
       #{'\\____/   \\____/   /____/  /_/ /_/   '}
       #{'  CJ\'s Shell v' + (build.stable? ? version.to_s : "dev")}
 
-      Warning: cjsh is not a POSIX compliant shell. Similar to FISH, misuse of cjsh or
-      incorrectly setting it as your login shell can have adverse effects and there
-      is NO warranty.
+      Warning: cjsh is 90% POSIX compliant but has known edge cases.
+       Misuse of cjsh or incorrectly setting it as your login shell 
+       can have adverse effects and there is NO warranty.
 
       To add CJsShell to the list of allowed shells run:
         sudo sh -c "echo #{opt_bin}/cjsh >> /etc/shells"
@@ -56,10 +56,6 @@ class Cjsh < Formula
         chsh -s #{opt_bin}/cjsh
       To see the help menu run:
         cjsh --help
-      Themes are installed at:
-        #{pkgshare}
-      Plugins can be installed at:
-        #{prefix}/plugins/
       For more information, visit:
         #{homepage}
     EOS
