@@ -10,6 +10,8 @@ class Cjsh < Formula
   def install
     # Build using the nob build system
     cd "build_tools" do
+      puts "Building cjsh using nob..."
+      puts "This can take a second."
       system "cc", "-o", "nob", "nob.c"
       system "./nob"
     end
