@@ -11,7 +11,7 @@ class Cjsh < Formula
     # Build using the nob build system
     cd "build_tools" do
       system "cc", "-o", "nob", "nob.c"
-      system "./nob", verbose: true
+      system "./nob"
     end
 
     # Install the binary
