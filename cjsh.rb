@@ -3,13 +3,28 @@ class Cjsh < Formula
   homepage "https://github.com/CadenFinley/CJsShell"
   license "MIT"
   url "https://github.com/CadenFinley/CJsShell.git",
-      tag:      "3.5.10",
-      revision: "8a0845542bfc04dc0f703dc34764a8fcacb4592e"
+      tag:      "3.5.11",
+      revision: "5dbbfb502f71af82627c6d92bf01e427774bbb39"
   head "https://github.com/CadenFinley/CJsShell.git", branch: "master"
 
   def install
+    git_hash = begin
+      if (buildpath/".git").directory?
+        Utils.safe_popen_read("git", "-C", buildpath, "rev-parse", "--short", "HEAD").strip
+      elsif stable? && stable.specs[:revision]
+        stable.specs[:revision][0, 7]
+      else
+        version.to_s
+      end
+    rescue
+      stable? && stable.specs[:revision] ? stable.specs[:revision][0, 7] : version.to_s
+    end
+
+    git_hash = "unknown" if git_hash.nil? || git_hash.empty?
+    ENV["CJSH_GIT_HASH_OVERRIDE"] = git_hash
+
     # Build using the nob build system
-    cd "build_tools" do
+    cd "toolchain/nob" do
       puts "Building cjsh using nob..."
       puts "This can take a second."
       system "cc", "-o", "nob", "nob.c"
