@@ -51,23 +51,10 @@ class Cjsh < Formula
     puts "  ~/.cache/cjsh/        (cache directory)"
     puts "  ~/.cjprofile          (profile file)"
     puts "  ~/.cjshrc             (rc file)"
+    puts "  ~/.cjsh_logout        (logout file)"
     puts ""
     puts "If cjsh was set as your login shell, change it back with:"
     puts "  chsh -s /bin/bash  # or /bin/zsh"
-  end
-
-  def caveats
-    <<~EOS
-      To use cjsh as your login shell:
-      1. Add #{bin}/cjsh to /etc/shells:
-         echo "#{bin}/cjsh" | sudo tee -a /etc/shells
-
-      2. Change your shell:
-         chsh -s #{bin}/cjsh
-
-      Configuration files will be created in ~/.config/cjsh/ on first run.
-      To uninstall cjsh configuration, run: cjsh -c "cjsh_uninstall"
-    EOS
   end
 
   test do
