@@ -47,7 +47,6 @@ class Cjsh < Formula
     
     # Inform user about additional files
     ohai "Additional files that can be manually removed:"
-    puts "  ~/.config/cjsh/          (configuration directory)"
     puts "  ~/.cache/cjsh/        (cache directory)"
     puts "  ~/.cjprofile          (profile file)"
     puts "  ~/.cjshrc             (rc file)"
