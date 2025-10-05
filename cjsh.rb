@@ -33,6 +33,9 @@ class Cjsh < Formula
 
     # Install the binary
     bin.install "build/cjsh"
+    
+    # Verify installation
+    system "#{bin}/cjsh", "--version"
   end
 
   def uninstall
