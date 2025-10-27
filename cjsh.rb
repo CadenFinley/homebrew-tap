@@ -3,9 +3,11 @@ class Cjsh < Formula
   homepage "https://github.com/CadenFinley/CJsShell"
   license "MIT"
   url "https://github.com/CadenFinley/CJsShell.git",
-      tag:      "3.10.7",
-      revision: "0ad5818ae9ad9d92b53544449ed1143506fb180f"
+      tag:      "3.10.8",
+      revision: "12f71937e4408fe4a37f5b607102af05418c84dc"
   head "https://github.com/CadenFinley/CJsShell.git", branch: "master"
+
+  depends_on "cmake" => :build
 
   def install
     git_hash = begin
@@ -23,16 +25,10 @@ class Cjsh < Formula
     git_hash = "unknown" if git_hash.nil? || git_hash.empty?
     ENV["CJSH_GIT_HASH_OVERRIDE"] = git_hash
 
-    # Build using the nob build system
-    cd "toolchain/nob" do
-      puts "Building cjsh using nob..."
-      puts "This can take a second."
-      system "cc", "-o", "nob", "nob.c"
-      system "./nob"
-    end
-
-    # Install the binary
-    bin.install "build/cjsh"
+    args = std_cmake_args + ["-DCMAKE_BUILD_TYPE=Release"]
+    system "cmake", "-S", ".", "-B", "build", *args
+    system "cmake", "--build", "build"
+    system "cmake", "--install", "build"
     
     # Verify installation
     system "#{bin}/cjsh", "--version"
