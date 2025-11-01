@@ -1,5 +1,5 @@
 class Cjsh < Formula
-  desc "CJ's Shell (cjsh) is a lightweight shell with out of the box power and speed."
+  desc "POSIX Shell Scripting meets Modern Shell Features."
   homepage "https://github.com/CadenFinley/CJsShell"
   license "MIT"
   url "https://github.com/CadenFinley/CJsShell.git",
