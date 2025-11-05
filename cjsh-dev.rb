@@ -1,13 +1,14 @@
-class Cjsh < Formula
+class CjshDev < Formula
   desc "POSIX Shell Scripting meets Modern Shell Features."
   homepage "https://github.com/CadenFinley/CJsShell"
   license "MIT"
-  url "https://github.com/CadenFinley/CJsShell.git",
-      tag:      "3.11.7",
-      revision: "244a61cbb1da5cfe38e7865eeffd031d81a49c59"
   head "https://github.com/CadenFinley/CJsShell.git", branch: "master"
 
+  version "HEAD"
+
   depends_on "cmake" => :build
+
+  conflicts_with "cjsh", because: "both install `cjsh` binaries"
 
   def install
     git_hash = begin
@@ -23,24 +24,31 @@ class Cjsh < Formula
     end
 
     git_hash = "unknown" if git_hash.nil? || git_hash.empty?
-    ENV["CJSH_GIT_HASH_OVERRIDE"] = git_hash
+    ENV["CJSH_GIT_HASH_OVERRIDE"] = "#{git_hash}-DEV"
 
     args = std_cmake_args + ["-DCMAKE_BUILD_TYPE=Release"]
     system "cmake", "-S", ".", "-B", "build", *args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
-    
+
     system "#{bin}/cjsh", "--version"
+  end
+
+  def caveats
+    <<~EOS
+      Any non-tagged releases or commits do not have the promise of not containing non-breaking changes or working builds.
+      For maximum build safety and usability, stick to tagged releases or through package manager installs of released builds.
+    EOS
   end
 
   def uninstall
     (bin/"cjsh").unlink if (bin/"cjsh").exist?
-    
+
     if File.exist?("/etc/shells") && File.read("/etc/shells").include?("#{bin}/cjsh")
       ohai "Removing #{bin}/cjsh from /etc/shells"
       system "sudo", "sed", "-i", "", "/#{bin.to_s.gsub("/", "\\/")}\\/cjsh/d", "/etc/shells"
     end
-    
+
     ohai "Additional files that can be manually removed:"
     puts "  ~/.cache/cjsh/        (cache directory)"
     puts "  ~/.cjprofile          (profile file)"
@@ -53,7 +61,6 @@ class Cjsh < Formula
 
   test do
     assert_match "cjsh", shell_output("#{bin}/cjsh --version 2>&1")
-    
     assert_match "hello", shell_output("#{bin}/cjsh -c 'echo hello'")
   end
 end
