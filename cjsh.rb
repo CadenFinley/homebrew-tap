@@ -4,7 +4,7 @@ class Cjsh < Formula
   license "MIT"
   url "https://github.com/CadenFinley/CJsShell.git",
       tag:      "4.1.1",
-      revision: "4d432881491a9edd4027c6ebf79ad96862962bb1"
+      revision: "368b270289fe8ece21e08cfc7515a1f54bb73f84"
   head "https://github.com/CadenFinley/CJsShell.git", branch: "master"
 
   depends_on "cmake" => :build
