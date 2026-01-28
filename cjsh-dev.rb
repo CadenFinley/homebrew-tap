@@ -11,28 +11,6 @@ class CjshDev < Formula
   conflicts_with "cjsh", because: "both install `cjsh` binaries"
 
   def install
-    requested_branch = ENV.fetch("CJSH_DEV_BRANCH", "").strip
-    branch_name = nil
-
-    if (buildpath/".git").directory?
-      if requested_branch.empty?
-        branch_name = Utils.safe_popen_read("git", "-C", buildpath, "branch", "--show-current").strip
-      else
-        branch_name = requested_branch
-        system "git", "-C", buildpath, "fetch", "origin", branch_name
-        system "git", "-C", buildpath, "checkout", branch_name
-      end
-
-      if branch_name.nil? || branch_name.empty?
-        commit_short = Utils.safe_popen_read("git", "-C", buildpath, "rev-parse", "--short", "HEAD").strip
-        branch_name = "detached-#{commit_short}"
-      end
-    elsif !requested_branch.empty?
-      branch_name = requested_branch
-    end
-
-    branch_name = "unknown-branch" if branch_name.nil? || branch_name.empty?
-
     git_hash = begin
       if (buildpath/".git").directory?
         Utils.safe_popen_read("git", "-C", buildpath, "rev-parse", "--short", "HEAD").strip
@@ -46,7 +24,7 @@ class CjshDev < Formula
     end
 
     git_hash = "unknown" if git_hash.nil? || git_hash.empty?
-    ENV["CJSH_GIT_HASH_OVERRIDE"] = "#{branch_name}-#{git_hash}-DEV"
+    ENV["CJSH_GIT_HASH_OVERRIDE"] = "#{git_hash}-DEV"
 
     args = std_cmake_args + ["-DCMAKE_BUILD_TYPE=Release"]
     system "cmake", "-S", ".", "-B", "build", *args
