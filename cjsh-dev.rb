@@ -3,9 +3,12 @@ class CjshDev < Formula
   homepage "https://github.com/CadenFinley/CJsShell"
   license "MIT"
 
-  head_branch = ENV["CJSH_DEV_BRANCH"]
-  head_branch = "master" if head_branch.nil? || head_branch.empty?
-  head "https://github.com/CadenFinley/CJsShell.git", branch: head_branch
+  DEV_BRANCH = begin
+    branch = ENV["CJSH_DEV_BRANCH"]
+    branch.nil? || branch.empty? ? "master" : branch
+  end
+
+  head "https://github.com/CadenFinley/CJsShell.git", branch: DEV_BRANCH
 
   version "HEAD"
 
@@ -14,9 +17,7 @@ class CjshDev < Formula
   conflicts_with "cjsh", because: "both install `cjsh` binaries"
 
   def install
-    head_branch = ENV["CJSH_DEV_BRANCH"]
-    head_branch = "master" if head_branch.nil? || head_branch.empty?
-    branch_tag = head_branch.tr("/", "-")
+    branch_tag = self.class::DEV_BRANCH.tr("/", "-")
 
     git_hash = begin
       if (buildpath/".git").directory?
