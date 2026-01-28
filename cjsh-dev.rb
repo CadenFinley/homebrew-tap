@@ -2,7 +2,10 @@ class CjshDev < Formula
   desc "POSIX Shell Scripting meets Modern Shell Features."
   homepage "https://github.com/CadenFinley/CJsShell"
   license "MIT"
-  head "https://github.com/CadenFinley/CJsShell.git", branch: "master"
+
+  head_branch = ENV["CJSH_DEV_BRANCH"]
+  head_branch = "master" if head_branch.nil? || head_branch.empty?
+  head "https://github.com/CadenFinley/CJsShell.git", branch: head_branch
 
   version "HEAD"
 
@@ -11,6 +14,10 @@ class CjshDev < Formula
   conflicts_with "cjsh", because: "both install `cjsh` binaries"
 
   def install
+    head_branch = ENV["CJSH_DEV_BRANCH"]
+    head_branch = "master" if head_branch.nil? || head_branch.empty?
+    branch_tag = head_branch.tr("/", "-")
+
     git_hash = begin
       if (buildpath/".git").directory?
         Utils.safe_popen_read("git", "-C", buildpath, "rev-parse", "--short", "HEAD").strip
@@ -24,7 +31,7 @@ class CjshDev < Formula
     end
 
     git_hash = "unknown" if git_hash.nil? || git_hash.empty?
-    ENV["CJSH_GIT_HASH_OVERRIDE"] = "#{git_hash}-DEV"
+    ENV["CJSH_GIT_HASH_OVERRIDE"] = "#{git_hash}-#{branch_tag}-DEV"
 
     args = std_cmake_args + ["-DCMAKE_BUILD_TYPE=Release"]
     system "cmake", "-S", ".", "-B", "build", *args
@@ -38,6 +45,8 @@ class CjshDev < Formula
     <<~EOS
       Any non-tagged releases or commits do not have the promise of not containing non-breaking changes or working builds.
       For maximum build safety and usability, stick to tagged releases or through package manager installs of released builds.
+      To build from a different branch HEAD, set CJSH_DEV_BRANCH before installing, e.g.:
+        CJSH_DEV_BRANCH=feature-x brew install cadenfinley/homebrew-tap/cjsh-dev
     EOS
   end
 
