@@ -3,7 +3,7 @@ class Cjsh < Formula
   homepage "https://github.com/CadenFinley/CJsShell"
   license "MIT"
   url "https://github.com/CadenFinley/CJsShell.git",
-      tag:      "1.1.3",
+      tag:      "v1.1.3",
       revision: "17ad981a6c20ef267d579cd1e94a80dff9338019"
   head "https://github.com/CadenFinley/CJsShell.git", branch: "master"
 
