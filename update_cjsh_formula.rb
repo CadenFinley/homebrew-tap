@@ -4,10 +4,12 @@ require "json"
 require "net/http"
 require "open-uri"
 require "openssl"
+require "rubygems/version"
 
 REPO = "CadenFinley/CJsShell"
 FORMULA_PATH = File.expand_path("cjsh.rb", __dir__)
 USER_AGENT = "cjsh-formula-updater"
+ZERO_VERSION = Gem::Version.new("0")
 
 class GitHubError < StandardError
   attr_reader :status
@@ -40,10 +42,30 @@ rescue GitHubError => e
 end
 
 def latest_tag_name
-  tags = github_json("/repos/#{REPO}/tags?per_page=1")
-  raise "No tags found for #{REPO}" if tags.empty?
+  refs = github_json("/repos/#{REPO}/git/matching-refs/tags?per_page=100")
+  raise "No tags found for #{REPO}" if refs.empty?
 
-  tags.first.fetch("name")
+  tags = refs.map { |ref| ref.fetch("ref").split("/").last }
+  tags.max_by { |tag| [normalized_version(tag) || ZERO_VERSION, tag] }
+end
+
+def normalized_version(tag)
+  Gem::Version.new(tag.sub(/\Av/, ""))
+rescue ArgumentError
+  nil
+end
+
+def choose_tag(release_tag, latest_tag)
+  return latest_tag unless release_tag
+  return release_tag unless latest_tag
+
+  release_version = normalized_version(release_tag)
+  latest_version = normalized_version(latest_tag)
+
+  return latest_tag unless release_version
+  return release_tag unless latest_version
+
+  release_version >= latest_version ? release_tag : latest_tag
 end
 
 def commit_sha(ref)
@@ -79,7 +101,8 @@ end
 
 def run
   release = latest_release
-  tag = release ? release.fetch("tag_name") : latest_tag_name
+  release_tag = release&.fetch("tag_name", nil)
+  tag = choose_tag(release_tag, latest_tag_name)
   url = tarball_url(tag)
   sha256 = sha256_for(url)
   git_hash = commit_sha(tag)[0, 8]
