@@ -1,7 +1,7 @@
 class Cjsh < Formula
   desc "POSIX Shell Scripting meets Modern Shell Features"
   homepage "https://github.com/CadenFinley/CJsShell"
-  url "https://github.com/CadenFinley/CJsShell/archive/refs/tags/1.1.5.tar.gz"
+  url "https://github.com/CadenFinley/CJsShell/archive/refs/tags/v1.1.5.tar.gz"
   sha256 "0f8ef63ffa25b0edb0d9d63bc993991ffb02e61243efc870281e35b8cdc4adc9"
   license "MIT"
   head "https://github.com/CadenFinley/CJsShell.git", branch: "master"
