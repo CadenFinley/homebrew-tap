@@ -28,7 +28,11 @@ class Cjsh < Formula
     git_hash = "unknown" if git_hash.blank?
     ENV["CJSH_GIT_HASH_OVERRIDE"] = git_hash
 
-    args = std_cmake_args + ["-DCMAKE_BUILD_TYPE=Release"]
+    args = std_cmake_args + [
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DCJSH_BUILD_TESTS=OFF",
+      "-DBUILD_TESTING=OFF"
+    ]
     system "cmake", "-S", ".", "-B", "build", *args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
