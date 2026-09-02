@@ -1,12 +1,12 @@
 class Cjsh < Formula
   desc "POSIX Shell Scripting meets Modern Shell Features"
   homepage "https://github.com/CadenFinley/CJsShell"
-  url "https://github.com/CadenFinley/CJsShell/archive/refs/tags/v1.4.2.tar.gz"
-  sha256 "e50ddadfbe61b73357d2cbe6d8eb40831915b942817b33def50111e227468c44"
+  url "https://github.com/CadenFinley/CJsShell/archive/refs/tags/v1.4.3.tar.gz"
+  sha256 "e2df94ac88864c7ca8f005f88c03918deae2e230fb24ac67164b3394694d9e2a"
   license "MIT"
   head "https://github.com/CadenFinley/CJsShell.git", branch: "master"
 
-  STABLE_GIT_HASH = "09890319".freeze
+  STABLE_GIT_HASH = "ef4685f6".freeze
 
   depends_on "cmake" => :build
 
