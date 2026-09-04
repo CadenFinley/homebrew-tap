@@ -99,6 +99,22 @@ def update_formula(content, replacements)
   updated
 end
 
+def prebuilt_checksums(release)
+  targets = %w[macos-arm64 macos-x86_64 linux-gnu-arm64 linux-gnu-x86_64]
+  assets = release.fetch("assets", []).to_h { |asset| [asset.fetch("name"), asset] }
+
+  checksums = targets.to_h do |target|
+    name = "cjsh-#{release.fetch("tag_name")}-#{target}.tar.gz"
+    asset = assets.fetch(name) { raise "Missing release asset #{name}" }
+    digest = asset.fetch("digest", "").sub(/\Asha256:/i, "")
+    raise "Release asset #{name} has no SHA-256 digest" unless digest.match?(/\A[0-9a-f]{64}\z/i)
+
+    [target, digest]
+  end
+
+  checksums.map { |target, digest| "    #{target.inspect} => #{digest.inspect}," }.join("\n")
+end
+
 def run
   release = latest_release
   release_tag = release&.fetch("tag_name", nil)
@@ -107,11 +123,18 @@ def run
   sha256 = sha256_for(url)
   git_hash = commit_sha(tag)[0, 8]
 
+  binary_checksums = prebuilt_checksums(release) if release
+
   formula = File.read(FORMULA_PATH)
   updated_formula = update_formula(formula,
                                    /url "[^"]+"/ => %{url "#{url}"},
                                    /sha256 "[^"]+"/ => %{sha256 "#{sha256}"},
                                    /STABLE_GIT_HASH = "[^"]+"\.freeze/ => %{STABLE_GIT_HASH = "#{git_hash}".freeze})
+
+  if binary_checksums
+    updated_formula = update_formula(updated_formula,
+                                     /  PREBUILT_SHA256 = \{.*?\n  \}\h*\.freeze/m => %{  PREBUILT_SHA256 = {\n#{binary_checksums}\n  }.freeze})
+  end
 
   if updated_formula == formula
     puts "cjsh.rb already up to date (#{tag})"
