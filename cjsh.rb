@@ -3,12 +3,12 @@ require "digest"
 class Cjsh < Formula
   desc "POSIX Shell Scripting meets Modern Shell Features"
   homepage "https://github.com/CadenFinley/CJsShell"
-  url "https://github.com/CadenFinley/CJsShell/archive/refs/tags/v1.4.5.tar.gz"
-  sha256 "7925ac42344af8aa321686b9df1c78e77300e477d2decf383078b000936be57d"
+  url "https://github.com/CadenFinley/CJsShell/archive/refs/tags/v1.4.6.tar.gz"
+  sha256 "97eb428e2ec8786be465812e88bc3c63a19a7214277d033b60aab19f5cf4bdd6"
   license "MIT"
   head "https://github.com/CadenFinley/CJsShell.git", branch: "master"
 
-  STABLE_GIT_HASH = "ddb84612".freeze
+  STABLE_GIT_HASH = "1afc4b12".freeze
 
   PREBUILT_SHA256 = {
     "macos-arm64" => "2dd5605379847245933e2e29c18f660914537c3abfd3bc156b5853b33abce7d4",
