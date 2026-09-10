@@ -1,8 +1,8 @@
 class CjshDev < Formula
   desc "POSIX Shell Scripting meets Modern Shell Features."
-  homepage "https://github.com/CadenFinley/CJsShell"
+  homepage "https://github.com/CadenFinley/cjsh"
   license "MIT"
-  head "https://github.com/CadenFinley/CJsShell.git", branch: "master"
+  head "https://github.com/CadenFinley/cjsh.git", branch: "master"
 
   version "HEAD"
 

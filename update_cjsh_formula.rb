@@ -6,7 +6,7 @@ require "open-uri"
 require "openssl"
 require "rubygems/version"
 
-REPO = "CadenFinley/CJsShell"
+REPO = "CadenFinley/cjsh"
 FORMULA_PATH = File.expand_path("cjsh.rb", __dir__)
 USER_AGENT = "cjsh-formula-updater"
 ZERO_VERSION = Gem::Version.new("0")

@@ -2,19 +2,19 @@ require "digest"
 
 class Cjsh < Formula
   desc "POSIX Shell Scripting meets Modern Shell Features"
-  homepage "https://github.com/CadenFinley/CJsShell"
-  url "https://github.com/CadenFinley/CJsShell/archive/refs/tags/v1.5.3.tar.gz"
-  sha256 "facdbd9326fce1af15f173e4b44f4e4188dd40808afd07c12001936dd8dd4f8d"
+  homepage "https://github.com/CadenFinley/cjsh"
+  url "https://github.com/CadenFinley/cjsh/archive/refs/tags/v1.5.4.tar.gz"
+  sha256 "e280768fdae3cfcba4f082d42c375accb2b4e8b148654171ad82a2bda0d27186"
   license "MIT"
-  head "https://github.com/CadenFinley/CJsShell.git", branch: "master"
+  head "https://github.com/CadenFinley/cjsh.git", branch: "master"
 
-  STABLE_GIT_HASH = "2439061b".freeze
+  STABLE_GIT_HASH = "54b762fa".freeze
 
   PREBUILT_SHA256 = {
-    "macos-arm64" => "4f36b3adfb735dee4d8ac9275438e000a176313b64224a4c8f044f9ba28c1fce",
-    "macos-x86_64" => "8b8c449ac34803a6eb852bf98129155bea2ef5e8304ec0f38d1e59934d1176c4",
-    "linux-gnu-arm64" => "887c8983570351055c0914ccad76c8bb35399cf04cac62f8589a1a7c82724899",
-    "linux-gnu-x86_64" => "d51c95be66dfe95add975eae983f3b062e051e6b7192f683ad0b9130b54e04a6",
+    "macos-arm64" => "09929d73e139c4e641e55550c02def901914e2b078b85385ef0feb062c498c8e",
+    "macos-x86_64" => "b7610fbd4c8b984cae0af023aea9ff15aac7855c0d10c71fe074e50092210df9",
+    "linux-gnu-arm64" => "68de4681eaaeb9d135a0ddb58652bb40bcec21bb303870ae96001d6d5a03cb12",
+    "linux-gnu-x86_64" => "099236fde8eaa800376786da8df25cad2c7d3565d88e353ff6e8684d3b60481f",
   }.freeze
 
   depends_on "cmake" => :build
@@ -34,7 +34,7 @@ class Cjsh < Formula
     return false unless target
 
     archive = buildpath/"cjsh-prebuilt.tar.gz"
-    archive_url = "https://github.com/CadenFinley/CJsShell/releases/download/v#{version}/cjsh-v#{version}-#{target}.tar.gz"
+    archive_url = "https://github.com/CadenFinley/cjsh/releases/download/v#{version}/cjsh-v#{version}-#{target}.tar.gz"
 
     begin
       system "curl", "-fL", "--retry", "3", "--silent", "--show-error", archive_url, "-o", archive
