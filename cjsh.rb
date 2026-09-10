@@ -3,18 +3,18 @@ require "digest"
 class Cjsh < Formula
   desc "POSIX Shell Scripting meets Modern Shell Features"
   homepage "https://github.com/CadenFinley/CJsShell"
-  url "https://github.com/CadenFinley/CJsShell/archive/refs/tags/v1.5.1.tar.gz"
-  sha256 "4acd414b1e069555c87a9724a003d4c726bc63620eabec10203eae1556ac9924"
+  url "https://github.com/CadenFinley/CJsShell/archive/refs/tags/v1.5.2.tar.gz"
+  sha256 "b72cf16ac26d847134bd54c16ba0f714848fffc487945e88e341e20dcb5d0e1d"
   license "MIT"
   head "https://github.com/CadenFinley/CJsShell.git", branch: "master"
 
-  STABLE_GIT_HASH = "b1e93791".freeze
+  STABLE_GIT_HASH = "4064405d".freeze
 
   PREBUILT_SHA256 = {
-    "macos-arm64" => "e69864717a8c62e173d03b6717fc799969d25e8e9053095b1e31f419c06552ef",
-    "macos-x86_64" => "9d99edea25cfd09680ce507c0c60d440d8c7742b3c3793b79eb63a2646f5e2f7",
-    "linux-gnu-arm64" => "ed8910ad70eefbb2108d440dd18bbfb1e4188016433f723759657a4aa4edcf78",
-    "linux-gnu-x86_64" => "291f47382c1082356ae55b7b2c06fa578370235208248df99321c110d2466cc3",
+    "macos-arm64" => "1848e0225ec990ef195ddd2d9719148164050988b1da66ab2d9f6ddc5adff725",
+    "macos-x86_64" => "8c81d45088117aab7739bb1bc87528ebca2f5826d6a2b9e711c1c21e08c91065",
+    "linux-gnu-arm64" => "794296b7b63bd571672c1cf78d8abd10386f80f1a28a82dfe4fe8bff05a35466",
+    "linux-gnu-x86_64" => "67657a795fe856ce2ee9eca5fe32ba2d4a98adca8efc0e67247c5973d3d6a16f",
   }.freeze
 
   depends_on "cmake" => :build
