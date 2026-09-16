@@ -11,10 +11,10 @@ class Cjsh < Formula
   STABLE_GIT_HASH = "d20d61f1".freeze
 
   PREBUILT_SHA256 = {
-    "macos-arm64" => "efb8cb44a86c3d6f53955c7970f982d288b43479882fd170069fa5ab392e8e3f",
-    "macos-x86_64" => "92c655cca6d09f6e50acba57130ec6d2b45ea158979c0ac2ace8e75cf0c1fa55",
-    "linux-gnu-arm64" => "80833fbb6974cef9b9cb82472ee68e92d5d243cdbd2463b1ca19f353405d8cbc",
-    "linux-gnu-x86_64" => "f06c23d0a1d8960ebdb39db72915787a99378b62bdf8ed860ce531450aefdf83",
+    "macos-arm64" => "89e25f1826aa1472ca38a686eec88d35bf5dcc54a328e3681e134e1fc91bb26c",
+    "macos-x86_64" => "6383cb36e2594e1c225d173a6fbe58e5e84c419d33c8ef1cf5729e1d67f2e4f3",
+    "linux-gnu-arm64" => "3bc54309adef473b1affa0334fb92c350a799300fe41fcc9b34d626daead6068",
+    "linux-gnu-x86_64" => "b89a7d7e0db448da438af4d2e40ff34c28702d617ebbc199f58b76311e5d5cc0",
   }.freeze
 
   depends_on "cmake" => :build
